@@ -1,5 +1,5 @@
 import { CLIENT_RENEG_LIMIT } from "tls";
-import { StopPointCategory, StopPointMode } from "./types";
+import { StopPoint, StopPointCategory, StopPointMode } from "./types";
 
 export function getStopPointCategory(mode: StopPointMode): StopPointCategory {
   switch (mode) {
@@ -19,10 +19,9 @@ export function getStopPointCategory(mode: StopPointMode): StopPointCategory {
   }
 }
 
-export function filterStopPoint(modes: StopPointMode[], category: StopPointCategory) {
-  const filteredModes = modes.filter(mode => getStopPointCategory(mode) === category);
-  const isMatching = filteredModes.some(mode => getStopPointCategory(mode) === category);
-
-  console.log(filteredModes);
-  return isMatching;
+export function filterStopPointsByCategory(stopPoints: StopPoint[], category: StopPointCategory): StopPoint[] {
+  return stopPoints.filter(stopPoint => {
+    const categories = stopPoint.modes.map(mode => getStopPointCategory(mode));
+    return categories?.includes(category);
+  });
 }
