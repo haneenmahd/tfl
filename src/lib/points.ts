@@ -9,6 +9,7 @@ export async function getFavoriteStopPoints(): Promise<IStopPoint[]> {
             return JSON.parse(_points);
         }
     } catch (error) {
+        // Not showing toast because this error doesn't need to shown to the user.
         console.info("No favourite stop points");
     }
 
