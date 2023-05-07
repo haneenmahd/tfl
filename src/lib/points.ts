@@ -1,7 +1,7 @@
 import { LocalStorage, Toast, showToast } from "@raycast/api";
-import { StopPoint } from "../types";
+import { IStopPoint } from "../types";
 
-export async function getFavoriteStopPoints(): Promise<StopPoint[]> {
+export async function getFavoriteStopPoints(): Promise<IStopPoint[]> {
     try {
         const _points = await LocalStorage.getItem<string>('favourite_stop_points');
 
@@ -15,7 +15,7 @@ export async function getFavoriteStopPoints(): Promise<StopPoint[]> {
     return [];
 }
 
-export async function addStopPointToFavorites(stopPoint: StopPoint): Promise<void> {
+export async function addStopPointToFavorites(stopPoint: IStopPoint): Promise<void> {
     try {
         const points = await getFavoriteStopPoints();
 
@@ -39,7 +39,7 @@ export async function addStopPointToFavorites(stopPoint: StopPoint): Promise<voi
     }
 }
 
-export async function removeStopPointFromFavorites(stopPoint: StopPoint): Promise<void> {
+export async function removeStopPointFromFavorites(stopPoint: IStopPoint): Promise<void> {
     try {
         const points = await getFavoriteStopPoints();
 

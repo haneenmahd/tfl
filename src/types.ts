@@ -1,57 +1,111 @@
-interface MatchQuality {
+export interface IStopPoint {
+  id: string;
+  url: string;
+  commonName: string;
+  distance: number;
+  placeType: string;
+  additionalProperties: IAdditionalProperty[];
+  children: IChild[];
+  childrenUrls: string[];
+  lat: number;
+  lon: number;
+  matchQuality: IMatchQuality;
+  name?: string;
+  naptanId: string;
+  modes: string[];
+}
+
+export interface IMatchQuality {
   matchQuality: number;
   matchType: string;
   confidence: number;
 }
 
-
-interface AdditionalProperty {
+export interface IAdditionalProperty {
   category: string;
   key: string;
   sourceSystemKey: string;
   value: string;
 }
 
-interface Child {
+export interface IChild {
   id: string;
   url: string;
   commonName: string;
   distance: number;
   placeType: string;
-  additionalProperties: AdditionalProperty[];
-  children: Child[];
+  additionalProperties: IAdditionalProperty[];
+  children: IChild[];
   childrenUrls: string[];
   lat: number;
   lon: number;
-  matchQuality: MatchQuality;
+  matchQuality: IMatchQuality;
   name: string;
   naptanId: string;
   modes: string[];
 }
 
-
-export interface StopPoint {
+export interface IArrival {
   id: string;
-  url: string;
-  commonName: string;
-  distance: number;
-  placeType: string;
-  additionalProperties: AdditionalProperty[];
-  children: Child[];
-  childrenUrls: string[];
-  lat: number;
-  lon: number;
-  matchQuality: MatchQuality;
-  name?: string;
-  naptanId: string;
-  modes: string[];
+  stationName: string;
+  lineId: string;
+  lineName: string;
+  platformName: string;
+  direction: string;
+  towards: string;
+  expectedArrival: string;
+  timeToStation: number;
+  modeName: string;
+  lineStatuses: ILineStatus[];
+  disruption?: IDisruption;
 }
 
+export interface ILineStatus {
+  id: number;
+  statusSeverity: number;
+  statusSeverityDescription: string;
+  reason?: string;
+  created?: string;
+  validityPeriods?: IValidityPeriod[];
+}
 
-export interface Departure {
+export interface IValidityPeriod {
+  fromDate: string;
+  toDate: string;
+  isNow: boolean;
+}
+
+export interface IDisruption {
+  category: string;
+  description: string;
+  additionalInfo: string;
+  created: string;
+  affectedRoutes: IAffectedRoute[];
+}
+
+export interface IAffectedRoute {
   id: string;
+  name: string;
+  direction: string;
+}
+
+export interface IDeparture {
+  id: string;
+  stationName: string;
+  lineId: string;
   lineName: string;
-  destinationName: string;
-  expectedArrival: string;
+  platformName: string;
+  direction: string;
+  towards: string;
+  expectedDeparture: string;
+  timeToStation: number;
   modeName: string;
+  additionalProperties: IAdditionalProperty[];
+}
+
+export interface IAdditionalProperty {
+  category: string;
+  key: string;
+  sourceSystemKey: string;
+  value: string;
 }

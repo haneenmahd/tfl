@@ -11,10 +11,10 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "departures",
-      "title": "Departures",
-      "subtitle": "Get departures in London",
-      "description": "Displays all departures in London",
+      "name": "arrivals",
+      "title": "Arrivals",
+      "subtitle": "Get arrivals in London",
+      "description": "Displays all arrivals in London",
       "mode": "view"
     }
   ],

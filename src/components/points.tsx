@@ -1,17 +1,17 @@
 import { Icon, List } from "@raycast/api";
 import { ReactNode, useEffect, useState } from "react";
 import { getStopPoints } from "../lib/api";
-import { StopPoint } from "../types";
+import { IStopPoint } from "../types";
 import Point from "./point";
 import useSWR from "swr"
 import { addStopPointToFavorites, getFavoriteStopPoints, removeStopPointFromFavorites } from "../lib/points";
 
 interface PointsProps {
-    onSelectPoint: (stopPoint: StopPoint) => ReactNode;
+    onSelectPoint: (stopPoint: IStopPoint) => ReactNode;
 }
 
 export default function Points({ onSelectPoint }: PointsProps) {
-    const [stopPoints, setStopPoints] = useState<StopPoint[]>([]);
+    const [stopPoints, setStopPoints] = useState<IStopPoint[]>([]);
     const [search, setSearch] = useState<string>("");
 
     const loadStopPoints = async () => {
@@ -28,7 +28,7 @@ export default function Points({ onSelectPoint }: PointsProps) {
         mutate
     } = useSWR('favourite-stop-points', getFavoriteStopPoints);
 
-    const handleToggleFavourite = async (stopPoint: StopPoint) => {
+    const handleToggleFavourite = async (stopPoint: IStopPoint) => {
         const isFavourite = favouriteStopPoints?.some(({ naptanId }) => naptanId === stopPoint.naptanId);
 
         if (isFavourite) {
@@ -44,9 +44,7 @@ export default function Points({ onSelectPoint }: PointsProps) {
         <List
             isLoading={stopPoints.length === 0}
             navigationTitle="Stop Points"
-            onSearchTextChange={setSearch}
-            throttle
-        >
+            onSearchTextChange={setSearch}>
             {stopPoints
                 .filter(point => point.commonName.toLowerCase().includes(search.toLowerCase()))
                 .map(point => {
@@ -65,8 +63,8 @@ export default function Points({ onSelectPoint }: PointsProps) {
 
             <List.EmptyView
                 icon={Icon.MagnifyingGlass}
-                title="Start typing"
-                description="Search for a stop point"
+                title="Not found"
+                description={`There is no stop point with name "${search}"`}
             />
         </List>
     );

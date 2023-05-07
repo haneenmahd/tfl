@@ -1,12 +1,12 @@
 import { List, Icon, ActionPanel, Action, Color } from "@raycast/api";
 import { ReactNode } from "react";
-import { StopPoint } from "../types";
+import { IStopPoint } from "../types";
 
 interface StopPointProps {
-    onSelect: (stopPoint: StopPoint) => ReactNode;
-    onToggleFavorite: (stopPoint: StopPoint) => void;
+    onSelect: (stopPoint: IStopPoint) => ReactNode;
+    onToggleFavorite: (stopPoint: IStopPoint) => void;
     isFavorite?: boolean;
-    stopPoint: StopPoint;
+    stopPoint: IStopPoint;
 }
 
 export default function Point({ onSelect, onToggleFavorite, isFavorite, stopPoint }: StopPointProps) {
@@ -27,9 +27,7 @@ export default function Point({ onSelect, onToggleFavorite, isFavorite, stopPoin
                             tintColor: Color.Red,
                         }}
                         shortcut={{ modifiers: isFavorite ? ["cmd", "shift"] : ["cmd"], key: "s" }}
-                        onAction={() => {
-                            onToggleFavorite(stopPoint);
-                        }}
+                        onAction={() => onToggleFavorite(stopPoint)}
                     />
                 </ActionPanel>
             }
