@@ -1,5 +1,5 @@
 import { Icon, List } from "@raycast/api";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { getStopPoints } from "../lib/api";
 import { IStopPoint } from "../types";
 import Point from "./point";
@@ -11,17 +11,12 @@ interface PointsProps {
 }
 
 export default function Points({ onSelectPoint }: PointsProps) {
-    const [stopPoints, setStopPoints] = useState<IStopPoint[]>([]);
     const [search, setSearch] = useState<string>("");
 
-    const loadStopPoints = async () => {
-        const data = await getStopPoints();
-        setStopPoints(data);
-    }
-
-    useEffect(() => {
-        loadStopPoints();
-    }, []);
+    const {
+        data: stopPoints,
+        isLoading: isStopPointsLoading
+    } = useSWR('stop-points', getStopPoints);
 
     const {
         data: favouriteStopPoints,
@@ -42,24 +37,25 @@ export default function Points({ onSelectPoint }: PointsProps) {
 
     return (
         <List
-            isLoading={stopPoints.length === 0}
             navigationTitle="Stop Points"
+            isLoading={isStopPointsLoading}
             onSearchTextChange={setSearch}>
-            {stopPoints
-                .filter(point => point.commonName.toLowerCase().includes(search.toLowerCase()))
-                .map(point => {
-                    const isFavorite = favouriteStopPoints?.some(({ naptanId }) => naptanId === point.naptanId);
+            {stopPoints &&
+                stopPoints
+                    .filter(point => point.commonName.toLowerCase().includes(search.toLowerCase()))
+                    .map(point => {
+                        const isFavorite = favouriteStopPoints?.some(({ naptanId }) => naptanId === point.naptanId);
 
-                    return (
-                        <Point
-                            isFavorite={isFavorite}
-                            onSelect={onSelectPoint}
-                            onToggleFavorite={() => handleToggleFavourite(point)}
-                            stopPoint={point}
-                            key={[point.name, point.commonName, point.naptanId].join("-")}
-                        />
-                    )
-                })}
+                        return (
+                            <Point
+                                isFavorite={isFavorite}
+                                onSelect={onSelectPoint}
+                                onToggleFavorite={() => handleToggleFavourite(point)}
+                                stopPoint={point}
+                                key={[point.name, point.commonName, point.naptanId].join("-")}
+                            />
+                        )
+                    })}
 
             <List.EmptyView
                 icon={Icon.MagnifyingGlass}
