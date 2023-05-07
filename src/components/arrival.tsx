@@ -1,7 +1,12 @@
 import { Action, ActionPanel, Color, Icon, List } from "@raycast/api";
 import { IArrival } from "../types";
 
-export default function Arrival({ arrival, onRefresh }: { arrival: IArrival, onRefresh: () => void; }) {
+interface ArrivalProps {
+    arrival: IArrival;
+    onRefresh: () => void;
+}
+
+export default function Arrival({ arrival, onRefresh }: ArrivalProps) {
     const arrivalDate = new Date(arrival.expectedArrival);
     const isArrivalNow = arrivalDate === new Date();
     const arrivalTime = isArrivalNow ? "NOW" : arrivalDate.toLocaleTimeString('en-US', {

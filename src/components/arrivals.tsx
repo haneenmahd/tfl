@@ -3,7 +3,11 @@ import { getArrivals } from "../lib/api";
 import { List } from "@raycast/api";
 import Arrival from "./arrival";
 
-export default function Arrivals({ stopPointId }: { stopPointId: string }) {
+interface ArrivalsProps {
+    stopPointId: string;
+}
+
+export default function Arrivals({ stopPointId }: ArrivalsProps) {
     const {
         data,
         isLoading,
