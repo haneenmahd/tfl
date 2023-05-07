@@ -10,7 +10,7 @@ export default function Command() {
                 <Lines
                     stopPoint={point}
                     onLineSelect={line =>
-                        <List>
+                        <List searchBarPlaceholder={`Search for an arrival in ${line.commonName}`}>
                             <Arrivals
                                 stopPointId={line.id}
                                 key={[line.id, 0].join("-")}

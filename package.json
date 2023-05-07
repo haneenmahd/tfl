@@ -3,10 +3,15 @@
   "name": "tfl",
   "title": "TFL",
   "description": "Viewing public transport departures in London",
-  "icon": "command-icon.png",
+  "icon": "icon.png",
   "author": "haneenmahdin",
   "categories": [
-    "Communication"
+    "Communication",
+    "Data",
+    "Web",
+    "Media",
+    "News",
+    "Applications"
   ],
   "license": "MIT",
   "commands": [
@@ -19,8 +24,8 @@
     },
     {
       "name": "favourite-stop-points",
-      "title": "Disruptions for favourite stop points",
-      "subtitle": "TFL",
+      "title": "Disruptions",
+      "subtitle": "Check for any disruptions in your lines",
       "description": "See any disruptions in your favourite stop points and lines",
       "mode": "menu-bar"
     }

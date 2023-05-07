@@ -11,7 +11,8 @@ interface LinesProps {
 export default function Lines({ onLineSelect, stopPoint }: LinesProps) {
     return (
         <List
-            navigationTitle="Lines">
+            navigationTitle="Lines"
+            searchBarPlaceholder={`Search for a station in ${stopPoint.commonName}`}>
             {stopPoint.children && stopPoint.children.map(child => (
                 <Line
                     child={child}
