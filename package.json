@@ -19,8 +19,8 @@
     },
     {
       "name": "favourite-stop-points",
-      "title": "Disruptions for favourite stop points",
-      "subtitle": "TFL",
+      "title": "Disruptions",
+      "subtitle": "Check for any disruptions in your lines",
       "description": "See any disruptions in your favourite stop points and lines",
       "mode": "menu-bar"
     }

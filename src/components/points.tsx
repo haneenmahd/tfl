@@ -39,7 +39,8 @@ export default function Points({ onSelectPoint }: PointsProps) {
         <List
             navigationTitle="Stop Points"
             isLoading={isStopPointsLoading}
-            onSearchTextChange={setSearch}>
+            onSearchTextChange={setSearch}
+            searchBarPlaceholder="Search for a stop point (eg: London City)">
             {stopPoints &&
                 stopPoints
                     .filter(point => point.commonName.toLowerCase().includes(search.toLowerCase()))
