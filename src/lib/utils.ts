@@ -1,5 +1,5 @@
 import { CLIENT_RENEG_LIMIT } from "tls";
-import { StopPoint, StopPointCategory, StopPointMode } from "./types";
+import { StopPoint, StopPointCategory, StopPointMode } from "../types";
 
 export function getStopPointCategory(mode: StopPointMode): StopPointCategory {
   switch (mode) {
