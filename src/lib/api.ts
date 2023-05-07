@@ -29,15 +29,3 @@ export const getArrivals = async (stopPointId: string): Promise<IArrival[]> => {
 
   return response.data;
 };
-
-export const getDepartures = async (stopPointId: string): Promise<IDeparture[]> => {
-  const response: AxiosResponse<IArrival[]> = await axios.get(
-    `${API_URL}/StopPoint/${stopPointId}/Departures`
-    , {
-      params: {
-        app_key: APP_KEY
-      }
-    });
-
-  return response.data;
-};

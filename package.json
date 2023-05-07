@@ -16,6 +16,13 @@
       "subtitle": "Get arrivals in London",
       "description": "Displays all arrivals in London",
       "mode": "view"
+    },
+    {
+      "name": "favourite-stop-points",
+      "title": "Disruptions for favourite stop points",
+      "subtitle": "TFL",
+      "description": "See any disruptions in your favourite stop points and lines",
+      "mode": "menu-bar"
     }
   ],
   "dependencies": {
